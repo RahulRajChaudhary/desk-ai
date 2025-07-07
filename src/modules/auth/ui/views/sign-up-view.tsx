@@ -4,13 +4,12 @@ import { z } from "zod";
 import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
 import { OctagonAlertIcon } from "lucide-react";
 import { FaGithub, FaGoogle } from "react-icons/fa";
 import { zodResolver } from "@hookform/resolvers/zod";
-
 import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Alert, AlertTitle } from "@/components/ui/alert";
@@ -35,10 +34,10 @@ const formSchema = z.object({
 });
 
 export const SignUpView = () => {
-  const router = useRouter();
 
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
