@@ -1,4 +1,5 @@
 import { SidebarProvider } from "@/components/ui/sidebar"
+import DashboardNavbar from "@/modules/dashboard/ui/components/dashboard-navbar"
 import { DashboardSidebar } from "@/modules/dashboard/ui/components/dashboard-sidebar"
 
 
@@ -11,6 +12,7 @@ const layout = ({children}: Props) => {
     <SidebarProvider>
       <DashboardSidebar />
       <main className="flex h-screen flex-col">
+        <DashboardNavbar />
         {children}
      </main>
     </SidebarProvider>
