@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from '@/components/ui/button'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { PanelLeftCloseIcon, PanelLeftIcon, Search, SearchIcon } from 'lucide-react'
 import { useSidebar } from '@/components/ui/sidebar'
 import DashboardCommand from './dashboard-command'
@@ -9,6 +9,25 @@ import DashboardCommand from './dashboard-command'
 const DashboardNavbar = () => {
   const { state, toggleSidebar, isMobile } = useSidebar()
   const [commandOpen, setCommandOpen] = useState(false)
+
+  useEffect(() => {
+    const down = (e: KeyboardEvent) => {
+      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault()
+        setCommandOpen((open) => !open)
+      }
+    }
+    document.addEventListener("keydown", down)
+    return () => document.removeEventListener("keydown", down)
+  }, [])
+
+  useEffect(() => {
+    if (commandOpen) {
+      document.addEventListener("click", () => {
+        setCommandOpen(false)
+  })
+    }
+  })
   return (
     <>
       <DashboardCommand open={commandOpen} setOpen={setCommandOpen} />
